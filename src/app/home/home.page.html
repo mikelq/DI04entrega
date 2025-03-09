@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+    Gráficos
+    </ion-title>
+    <ion-segment [value]="chartSeleccionado" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="bar-chart">
+        Bar Chart
+      </ion-segment-button>
+      <ion-segment-button value="line-chart">
+        Line Chart
+      </ion-segment-button>
+      <ion-segment-button value="pie-chart">
+        Pie Chart
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<!-- Mostrar u ocultar componentes según el segmento seleccionado -->
+<ion-content [fullscreen]="true">
+  <ion-grid *ngIf="chartSeleccionado === 'bar-chart'">
+    <ion-row>
+      <ion-col size="6">
+        <app-bar-chart [chartSelected]="chartSeleccionado" [coloresCategorias]="borderColorCat" [bgColorCategorias]="backgroundColorCat"></app-bar-chart>
+      </ion-col>
+      <ion-col size="6">
+        <app-line-chart></app-line-chart>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <app-pie-chart></app-pie-chart>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!--el segmento "Line-Chart" muestra solo su gráfica-->
+  <app-line-chart *ngIf="chartSeleccionado === 'line-chart'"></app-line-chart>
+  <!--el segmento "Pie-Chart" muestra solo su gráfica-->
+  <app-pie-chart *ngIf="chartSeleccionado === 'pie-chart'"></app-pie-chart>
+</ion-content>
